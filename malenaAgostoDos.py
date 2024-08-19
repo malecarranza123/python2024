@@ -1,6 +1,6 @@
 # Diseñar un programa que permita al usuario gestionar una lista de tareas pendientes.
 
-tareas={}
+tareas = {}
 
 while True:
          print( '''
@@ -8,7 +8,7 @@ while True:
           #     1 - Añadir una tarea                  #
           #     2 - Ver todas las tareas              #
           #     3 - Marcar una tarea como completada  #
-          #     4-  Salir                             #
+          #     4 - Salir                             #
           ############################################# ''')
 
          opcion = int(input("Ingrese el número de la opción que desea realizar: "))
@@ -17,7 +17,7 @@ while True:
             titulo = input("Ingrese el titulo de la tarea: ")
             tarea = input("Ingrese la tarea: ")
             tareas[titulo] = tarea
-            print("tarea agregada.")
+            print("Tarea agregada.")
          
          elif opcion == 2:
            if tareas:
@@ -28,8 +28,11 @@ while True:
             print("La lista de tareas está vacía.")
 
          elif opcion == 3:
-           titulo = input("Ingrese el titulo de la tarea que ya completó: ")
-           if titulo in tareas:
+           if tareas == {}:
+              print("no tienes tareas guardadas")
+           else:
+            titulo = input("Ingrese el titulo de la tarea que ya completó: ")
+            if titulo in tareas:
              del tareas[titulo]
              print("Tarea completada.")
          
@@ -39,4 +42,4 @@ while True:
          else:
             print("Opción no válida. Por favor, seleccione una opción válida.")
 
-print("gracias por usar este programa :D")
+print("chau, gracias por usar este programa :D")
