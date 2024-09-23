@@ -29,8 +29,8 @@ while True:
         print(f"Cantidad de personajes creados: {cantidadPersonaje}")
 
     elif opcion == 2:
-        if cantidadPersonaje==0:
-            print("No hay personajes creados para jugar")
+        if cantidadPersonaje<=1:
+            print("Se necesitan 2 personajes para jugar")
         else:
             print("Iniciando pelea con los siguientes personajes: ")
             for personaje in personajes:

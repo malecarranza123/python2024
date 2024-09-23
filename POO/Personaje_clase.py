@@ -1,3 +1,5 @@
+import random
+
 class Personaje:
     estado=True
     vida=100
@@ -9,6 +11,7 @@ class Personaje:
         self.resistencia=resistencia
         self.fuerza=fuerza
         self.estado=Personaje.estado
+        self.vida=Personaje.vida
 
     def atacar(self, otro_personaje):
         if self.estado: #si estoy vivo
