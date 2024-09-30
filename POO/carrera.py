@@ -22,7 +22,7 @@ while True:
         fuerza = int(input("Fuerza(0/100): "))
 
         nuevo_personaje=Personaje(nombre,altura,velocidad,resistencia,fuerza) 
-        personajes.append(nuevo_personaje)  
+        personajes.append(nuevo_personaje) #Guarda el personaje
 
         cantidadPersonaje+=1
         print(f"El personaje {nuevo_personaje} ha sido creado con éxito")
@@ -38,7 +38,7 @@ while True:
         continue
         
 
-    elif opcion == 3:
+    elif opcion == 3: #Sale del programa
         print("chau")
         break
 

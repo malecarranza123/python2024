@@ -1,8 +1,8 @@
 import random
 
 class Personaje:
-    estado=True
-    vida=100
+    estado=True #vivo
+    vida=100 #vida inicial
 
     def __init__(self,nombre, altura, velocidad, resistencia, fuerza):
         self.nombre=nombre
@@ -15,8 +15,12 @@ class Personaje:
 
     def atacar(self, otro_personaje):
         if self.estado: #si estoy vivo
-            danio=self.fuerza-(otro_personaje.resistencia)
-            danio=max(0,danio)#no puede ser negativo
+            #genera un ataque aleatorio entre 0 y la fuerza del personaje
+            atauque_realizado=random.randint(0,self.fuerza)
+            #genera una defensa aleatoria entre 0 y la resistencia del defensor
+            defensa_realizada=random.randint(0, otro_personaje.resistencia)
+
+            danio=max(0,atauque_realizado - defensa_realizada)#evitar daño negativo
             print(f"{self.nombfre} ataca a {otro_personaje.nombre} causando {danio} daño")
             otro_personaje.recibir_dano(danio)#llamando al metodo recibir_dano y la cantidad es = danio
         else:
@@ -25,10 +29,10 @@ class Personaje:
 
     def recibir_dano(self, cantidad):
         if self.estado:
-            self.vida-=cantidad
+            self.vida-=cantidad #reduce la vida
             print(f"{self.nombre} recibe {cantidad} de daño. Vida restante es {self.vida}")
             if self.vida<=0:
-                self.vida=0
+                self.vida=0 #la vida no puede ser negativa
                 print(f"{self.nombre} ha muerto")
             else:
                 print(f"{self.nombre} ya está muerto")    
