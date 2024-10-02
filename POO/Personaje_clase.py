@@ -21,7 +21,7 @@ class Personaje:
             defensa_realizada=random.randint(0, otro_personaje.resistencia)
 
             danio=max(0,atauque_realizado - defensa_realizada)#evitar daño negativo
-            print(f"{self.nombfre} ataca a {otro_personaje.nombre} causando {danio} daño")
+            print(f"{self.nombre} ataca a {otro_personaje.nombre} causando {danio} daño")
             otro_personaje.recibir_dano(danio)#llamando al metodo recibir_dano y la cantidad es = danio
         else:
             print(f"{self.nombre} está muerto y no puede atacar")

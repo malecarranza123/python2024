@@ -35,8 +35,10 @@ while True:
             print("Iniciando pelea con los siguientes personajes: ")
             for personaje in personajes:
                 print(f"- {personaje.nombre}")
-        continue
-        
+                
+            atacante = personajes[0]  # Personaje 1
+            defensor = personajes[1]  # Personaje 2
+            atacante.atacar(defensor)
 
     elif opcion == 3: #Sale del programa
         print("chau")
