@@ -2,10 +2,16 @@ import sqlite3
 
 class Estudiante:
     #Método constructor
-    def __init__(self, nombre, edad, año_id):
+    def __init__(self, legajo_id, dni, nombre, apellido, edad, fecha_nacimiento, curso, estado, email):
+        self.legajo_id=legajo_id
+        self.dni=dni
         self.nombre=nombre
+        self.apellido=apellido
         self.edad=edad
-        self.año_id=año_id
+        self.fecha_nacimiento=fecha_nacimiento
+        self.curso=curso
+        self.estado=estado
+        self.email=email
 
     #Método para guardar la información del estudiante en la db
     def guardar(self):
@@ -13,8 +19,8 @@ class Estudiante:
         c=conn.cursor() #Cursor para interactuar
 
         #Ejecutar una consulta SQL para insertar los datos del estudiante
-        c.execute('INSERT INTO Estudiantes (nombre, edad, año_id) VALUES (?, ?, ?)', 
-                    (self.nombre, self.edad, self.año_id))
+        c.execute('INSERT INTO Estudiantes (legajo_id, dni, nombre, apellido, edad, fecha_nacimiento, curso, estado, email) VALUES (?, ?, ?)', 
+                    (self.legajo_id, self.dni, self.nombre, self.apellido, self.edad, self.fecha_nacimiento, self.curso, self.estado, self.email))
 
         conn.commit() #Guardar los cambios
         conn.close() #Cerrar la conexión a la base de datos
