@@ -1,0 +1,5 @@
+DUDAS
+
+elif opcion == 2:
+    Estudiante.mostrar_todos(conn)
+
