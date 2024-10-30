@@ -19,14 +19,14 @@ class Estudiante:
         c=conn.cursor() #Cursor para interactuar
 
         #Ejecutar una consulta SQL para insertar los datos del estudiante
-        c.execute('INSERT INTO Estudiantes (legajo_id, dni, nombre, apellido, edad, fecha_nacimiento, curso, estado, email) VALUES (?, ?, ?)', 
+        c.execute('INSERT INTO Estudiantes (legajo_id, dni, nombre, apellido, edad, fecha_nacimiento, curso, estado, email) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)', 
                     (self.legajo_id, self.dni, self.nombre, self.apellido, self.edad, self.fecha_nacimiento, self.curso, self.estado, self.email))
 
         conn.commit() #Guardar los cambios
         conn.close() #Cerrar la conexión a la base de datos
 
     @staticmethod #Metodo estático, no necesita que le pases ningún argumento
-    def consulta_estudiantes():
+    def mostrar_todos():
         conn=sqlite3.connect('escolar.db') #Conectar la base de datos 'escolar.db'
         c=conn.cursor()
 
@@ -36,3 +36,26 @@ class Estudiante:
         conn.close()
 
         return estudiantes #Devolver la lista de estudiantes
+
+    def modificar(self):
+        conn=sqlite3.connect('escolar.db') #Conectar la base de datos 'escolar.db'
+        c=conn.cursor() #Cursor para interactuar
+        
+        # Actualizar los datos del estudiante
+        c.execute('''
+            UPDATE Estudiantes 
+            SET dni = ?, nombre = ?, apellido = ?, edad = ?, fecha_nacimiento = ?, curso = ?, estado = ?, email = ? 
+            WHERE legajo_id = ?
+        ''', (self.dni, self.nombre, self.apellido, self.edad, self.fecha_nacimiento, self.curso, self.estado, self.email, self.legajo_id))
+
+    @staticmethod
+    def eliminar(legajo_id):
+        conn = sqlite3.connect('escolar.db')  # Conectar la base de datos 'escolar.db'
+        c = conn.cursor()  # Cursor para interactuar
+
+        # Eliminar los datos del estudiante
+        c.execute('DELETE FROM Estudiantes WHERE legajo_id = ?', (legajo_id,))
+        conn.commit()  # Guardar los cambios
+        conn.close()  # Cerrar la conexión a la base de datos
+        
+    
