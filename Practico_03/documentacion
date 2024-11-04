@@ -34,3 +34,7 @@ Cuando llamo a un método estático no necesito crear un objeto
 ejemplo:
 Estudiante.mostrar_todos()
 mostrar_todos es un método estático, Estudiante lleva mayúscula al principio
+
+actualizar:
+sudo apt update
+sudo apt upgrade code
