@@ -9,39 +9,21 @@ def conectar_db():
     conn=sqlite3.connect('escolar.db')
     return conn
 
-#funcion principal para ejecutar el programa
-def main():
-    conn=conectar_db() #conexión con la base de datos
-    cursor=conn.cursor() #cursor para interactuar
-
-    while True: 
-        print("\n--- Sistema Escolar ---")
-        print( '''
-        #############################################
-        #     1. Gestionar Estudiantes              #
-        #     2. Gestionar Profesores               #
-        #     3. Gestionar Materias                 #
-        #     4. Gestionar Calificaciones           #
-        #     5. Salir                              #
-        ############################################# ''')
-        
+def validacion():
+    while True:
+        print('''
+            #############################################
+            #       ¿CONFIRMA SU ELECCIÓN?              #
+            #     1 - SI                                #
+            #     2 - NO, deseo volver a elegir         #
+            #############################################   
+        ''')
         opcion = int(input("Selecciona una opción: "))
 
-        if opcion == 1:
-            menu_estudiantes()
-        elif opcion == 2:
-            menu_profesores()
-        elif opcion == 3:
-            menu_materias()
-        elif opcion == 4:
-            menu_calificaciones()
-        elif opcion == 5:
-            print("Saliendo del sistema...")
+        if opcion==1:
             break
-        else:
-            print("Opción no válida. Inténtalo de nuevo.")
-
-    conn.close() #cierra la conexión con la base de datos al salir del programa
+        elif opcion==2:
+            main()
 
 def menu_estudiantes():
     while True:
@@ -59,7 +41,6 @@ def menu_estudiantes():
 
         if opcion == 1:
             print("\n--- Agregar Estudiante ---")
-            legajo_id = input("Legajo ID: ")
             dni = input("DNI: ")
             nombre = input("Nombre: ")
             apellido = input("Apellido: ")
@@ -69,12 +50,13 @@ def menu_estudiantes():
             estado = input("Estado: ")
             email = input("Email: ")
 
-            estudiante = Estudiante(legajo_id, dni, nombre, apellido, edad, fecha_nacimiento, curso, estado, email)
+            #estudiante.guardar llama a un método de instancia, por eso hay que crear un objeto de estudiante
+            estudiante = Estudiante(None, dni, nombre, apellido, edad, fecha_nacimiento, curso, estado, email)
             estudiante.guardar() #guarda los datos cargados
             print("Estudiante agregado exitosamente.") 
         
         elif opcion == 2:
-            Estudiante.mostrar_todos(conn)
+            Estudiante.mostrar_todos() #llama a un método estático, por eso NO necesito crear un objeto de estudiante
             
         elif opcion == 3:
             print("\n--- Modificar Estudiante ---")
@@ -95,7 +77,7 @@ def menu_estudiantes():
         elif opcion == 4:
             print("\n--- Eliminar Estudiante ---")
             legajo_id = input("Legajo ID del estudiante a eliminar: ")
-            Estudiante.eliminar(legajo_id) #elimina al estudiante por si legajo_id
+            Estudiante.eliminar(legajo_id) #elimina al estudiante por su legajo_id
             print("Estudiante eliminado exitosamente.")
             
         elif opcion == 5:
@@ -132,7 +114,7 @@ def menu_profesores():
             print("Profesor agregado exitosamente.")
 
         elif opcion == 2:
-            Profesor.mostrar_todos(conn)
+            Profesor.mostrar_todos()
 
         elif opcion == 3:
             print("\n--- Modificar Profesor ---")
@@ -183,7 +165,7 @@ def menu_materias():
             print("Materia agregada exitosamente.") 
         
         elif opcion == 2:
-            Materia.mostrar_todos(conn)
+            Materia.mostrar_todas()
             
         elif opcion == 3:
             print("\n--- Modificar Materia ---")
@@ -236,10 +218,10 @@ def menu_calificaciones():
             print("Calificacion agregada exitosamente.") 
         
         elif opcion == 2:
-            Calificacion.mostrar_todos(conn)
+            Calificacion.mostrar_todas()
             
         elif opcion == 3:
-            print("\n--- Modificar Materia ---")
+            print("\n--- Modificar Calificación ---")
             id_estudiante=input("ID del estudiante calificado: ")
             id_materia=input("ID de la materia: ")
             curso=input("Nuevo Curso: ")
@@ -251,7 +233,7 @@ def menu_calificaciones():
             print("Calificacion modificada exitosamente.")
             
         elif opcion == 4:
-            print("\n--- Eliminar Calificacion ---")
+            print("\n--- Eliminar Calificación ---")
             id_materia = input("ID del estudiante calificado a eliminar: ")
             Calificacion.eliminar(id_estudiante) #elimina la calificación por el id del estudiante que tenia la calificación
             print("Calificacion eliminada exitosamente.")
@@ -261,6 +243,43 @@ def menu_calificaciones():
     
         else:
             print("Opción no válida. Inténtalo de nuevo.")
+
+#funcion principal para ejecutar el programa
+def main():
+    conn=conectar_db() #conexión con la base de datos
+    cursor=conn.cursor() #cursor para interactuar
+
+    while True: 
+        print("\n--- Sistema Escolar ---")
+        print( '''
+        #############################################
+        #     1. Gestionar Estudiantes              #
+        #     2. Gestionar Profesores               #
+        #     3. Gestionar Materias                 #
+        #     4. Gestionar Calificaciones           #
+        #     5. Salir                              #
+        ############################################# ''')
+        
+        opcion = int(input("Selecciona una opción: "))
+
+        validacion()
+
+        if opcion == 1:
+            menu_estudiantes()
+        elif opcion == 2:
+            menu_profesores()
+        elif opcion == 3:
+            menu_materias()
+        elif opcion == 4:
+            menu_calificaciones()
+        elif opcion == 5:
+            print("Saliendo del sistema...")
+            break
+        else:
+            print("Opción no válida. Inténtalo de nuevo.")
+
+    conn.close() #cierra la conexión con la base de datos al salir del programa
+
 
 #punto de entrada del programa
 if __name__ == "__main__":

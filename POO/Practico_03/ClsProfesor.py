@@ -22,7 +22,7 @@ class Profesor:
         conn.close() #Cerrar la conexión a la base de datos
 
     @staticmethod #Metodo estático, no necesita que le pases ningún argumento
-    def consulta_profesores():
+    def mostrar_todos():
         conn=sqlite3.connect('escolar.db') #Conectar la base de datos 'escolar.db'
         c=conn.cursor()
 

@@ -26,7 +26,7 @@ class Estudiante:
         conn.close() #Cerrar la conexión a la base de datos
 
     @staticmethod #Metodo estático, no necesita que le pases ningún argumento
-    def consulta_estudiantes():
+    def mostrar_todos():
         conn=sqlite3.connect('escolar.db') #Conectar la base de datos 'escolar.db'
         c=conn.cursor()
 
@@ -49,12 +49,12 @@ class Estudiante:
         ''', (self.dni, self.nombre, self.apellido, self.edad, self.fecha_nacimiento, self.curso, self.estado, self.email, self.legajo_id))
 
     @staticmethod
-    def eliminar(id):
+    def eliminar(legajo_id):
         conn = sqlite3.connect('escolar.db')  # Conectar la base de datos 'escolar.db'
         c = conn.cursor()  # Cursor para interactuar
 
         # Eliminar los datos del estudiante
-        c.execute('DELETE FROM Estudiantes WHERE legajo_id = ?', (id,))
+        c.execute('DELETE FROM Estudiantes WHERE legajo_id = ?', (legajo_id,))
         conn.commit()  # Guardar los cambios
         conn.close()  # Cerrar la conexión a la base de datos
         

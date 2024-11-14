@@ -1,5 +1,43 @@
-DUDAS
+DUDAS:
 
 elif opcion == 2:
-    Estudiante.mostrar_todos(conn)
+    Estudiante.mostrar_todos(conn): le saqué el "conn" porque el método mostrar_todos gestiona su propia conexión a la base de datos
 
+import sqlite3
+from ClsEstudiante import Estudiante
+from ClsProfesor import Profesor
+from ClsMateria import Materia
+from ClsCalificacion import Calificacion
+
+No sé por qué me marca las Cls en amarillo, no es por tener los archivos en otra carpeta, y no está mal escrito, eliminé el __pycache__ (chatGPT me dijo que podía ser eso) pero no lo solucionó(solucionado con un cartelito)
+
+cursor=conn.cursor()
+"cursor" está oscuro porque no lo uso
+
+elif opcion == 4:
+    print("\n--- Eliminar Calificación ---")
+    id_materia = input("ID del estudiante calificado a eliminar: ") No estoy segura de que sea así
+    Calificacion.eliminar(id_estudiante)
+    print("Calificacion eliminada exitosamente.")
+    
+______________________________________________________________________________________________________________
+
+NOTAS:
+
+Cuando llamo un método de instancia primero tengo que crear un objeto de la clase
+ejemplo:
+estudiante = Estudiante(legajo_id, dni, nombre, apellido, edad, fecha_nacimiento, curso, estado, email)
+estudiante.guardar()
+como guardar() es método de instancia primero creo un objeto de estudiante, además estudiante va con minúscula.
+
+Cuando llamo a un método estático no necesito crear un objeto
+ejemplo:
+Estudiante.mostrar_todos()
+mostrar_todos es un método estático, Estudiante lleva mayúscula al principio
+
+actualizar:
+sudo apt update
+sudo apt upgrade code
+
+utilizar python3:
+sudo update-alternatives --install /usr/bin/python python /usr/bin/python3 1
